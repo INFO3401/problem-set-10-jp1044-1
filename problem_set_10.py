@@ -1,5 +1,5 @@
 #worked with Marissa Kelley, Taylor Lawrence, and Hannah Weber
-#Problem set 9 - Jacob Paul
+#Problem set 10 - Jacob Paul
 
 import csv
 from sklearn.linear_model import LinearRegression
