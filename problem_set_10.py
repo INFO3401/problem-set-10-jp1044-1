@@ -42,7 +42,8 @@ class LinearAnalysis:
                     best_r2 = r_score
                     best_var = column
         self.bestX = best_var
-        print(best_var, best_r2)
+        print ("Linear Regression Equation: y = " + str(regr.intercept_) + " + " + str(regr.coef_[0]) + " * x" )
+        print("Best variable: " + best_var, best_r2)
 
 
 #Problem 2
@@ -67,8 +68,9 @@ class LogisticAnalysis:
                 if r_score > best_r2:
                     best_r2 = r_score
                     best_var = column
+        print ("Logistic Regression Equation: y = " + str(regr.intercept_[0]) + " + " + str(regr.coef_[0][0]) + " * x" )
         self.bestX = best_var
-        print(best_var, best_r2)
+        print("Best variable: " + best_var, best_r2)
 
     def runMultipleRegression(self, data):
         regr = LogisticRegression()
@@ -76,6 +78,13 @@ class LogisticAnalysis:
         regr.fit(data.dataset[cols], data.dataset[self.targetY])
         pred = regr.predict(data.dataset[cols])
         r_score = r2_score(data.dataset[self.targetY],pred)
+        equation = []
+        for i, coef in enumerate(regr.coef_[0]):
+            if i != len(regr.coef_[0])-1:
+                equation.append (str("%.3f" % coef) + "x + ")
+            else:
+                equation.append (str("%.3f" % coef) + "x")
+        print("Multiple Regression Equation: " + str("%.3f" % regr.intercept_[0]) + " " + ''.join(equation))
         print(r_score)
 
 
@@ -102,4 +111,21 @@ log_analysis.runMultipleRegression(analysis_data)
 # The R2 value for the simple logistic regression was 0.425 and the R2 value for multiple logistic
 # regression was 0.760.
 
-#Problem set 10 -> problem 3
+
+
+
+#Problem set 10 -> Part 4
+#(a)
+#independent variable: caramel/chocolate - categorical
+#dependent variable: sugar amount - continuous
+#null hypothesis: caramel and chocolate candy have the same amount of sugar
+
+#(b)
+#independent variable: blue/red state - categorical
+#dependent variable: number of split ticket voters - continuous
+#null hypothesis: blue/red states have the same amount of split ticket voters
+
+#(c)
+#independent variable: battery life - continuous
+#dependent variable: selling rate - continuous
+#null hypothesis: All phones sell at the same rate no matter the battery life
